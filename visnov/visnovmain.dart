@@ -1,6 +1,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:owo/views/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
         home: MyHomePage(),
       ),
@@ -35,15 +36,15 @@ class MyAppState extends ChangeNotifier {
   }
 
   void choice1() {
-    current = WordPair("You died: ", "You got bullied so much in #lobby that you unalived yourself");
+    current = WordPair("You died: ", "imagine i felt bothered enough to write this");
     notifyListeners();
   }
   void choice2() {
-    current = WordPair("You died: ", "You got takfired so much in #discussion that you unalived yourself");
+    current = WordPair("You died: ", "the UI is so ugly");
     notifyListeners();
   }
   void choice3() {
-    current = WordPair("You survived: ", "You instead asked a question over at #islam-questions and therefore survived");
+    current = WordPair("I swear I'm not dumb", "Just busy, that's why this took forever");
     notifyListeners();
   }
 
@@ -55,7 +56,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool _isShown = true;
   var selectedIndex = 0;
 
   @override
@@ -64,8 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (selectedIndex) {
       case 0:
         page = GeneratorPage();
-    //case 1:
-    //page = FavoritesPage();
+      case 1:
+        page = HomePage();
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -74,6 +74,27 @@ class _MyHomePageState extends State<MyHomePage> {
       return Scaffold(
         body: Row(
           children: [
+            SafeArea(
+              child: NavigationRail(
+                extended: constraints.maxWidth >= 600,
+                destinations: [
+                  NavigationRailDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('Home'),
+                  ),
+                  NavigationRailDestination(
+                    icon: Icon(Icons.message),
+                    label: Text('Channels'),
+                  ),
+                ],
+                selectedIndex: selectedIndex,
+                onDestinationSelected: (value) {
+                  setState(() {
+                    selectedIndex = value;
+                  });
+                },
+              ),
+            ),
             Expanded(
               child: Container(
                 color: Theme.of(context).colorScheme.primaryContainer,
@@ -86,7 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 }
-
 class GeneratorPage extends StatefulWidget {
   @override
   _GeneratorPageState createState() => _GeneratorPageState();
@@ -117,7 +137,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                     });
                     appState.choice1();
                   },
-                  child: Text('Secret'),
+                  child: Text('#lobby'),
                 ),
                 SizedBox(width: 10),
                 ElevatedButton(
@@ -127,7 +147,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                     });
                     appState.choice2();
                   },
-                  child: Text('Possibly better?'),
+                  child: Text('#discussion'),
                 ),
                 SizedBox(width: 10),
                 ElevatedButton(
@@ -137,7 +157,7 @@ class _GeneratorPageState extends State<GeneratorPage> {
                     });
                     appState.choice3();
                   },
-                  child: Text('DO NOT PICK!!!'),
+                  child: Text('#questions'),
                 ),
               ],
             ),
@@ -196,7 +216,7 @@ class _BigCardState extends State<BigCard> {
               SizedBox(height: 8),
               Text(
                 widget.pair.second,
-                style: style,
+                style: TextStyle(fontSize: 25.0,  color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ],
           ),
