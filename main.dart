@@ -36,11 +36,11 @@ class MyAppState extends ChangeNotifier {
   }
 
   void choice1() {
-    current = WordPair("You died: ", "imagine i felt bothered enough to write this");
+    current = WordPair("You died: ", "it's literally lobby");
     notifyListeners();
   }
   void choice2() {
-    current = WordPair("You died: ", "the UI is so ugly");
+    current = WordPair("You died: ", "takfired to death rip");
     notifyListeners();
   }
   void choice3() {
@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             SafeArea(
               child: NavigationRail(
-                extended: constraints.maxWidth >= 600,
+                extended: constraints.maxWidth >= 1000,
                 destinations: [
                   NavigationRailDestination(
                     icon: Icon(Icons.home),
